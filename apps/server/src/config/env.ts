@@ -10,8 +10,8 @@ const envSchema = z.object({
 
   JWT_ACCESS_SECRET: z.string().min(16, "JWT_ACCESS_SECRET must be set to a long random string"),
   JWT_REFRESH_SECRET: z.string().min(16, "JWT_REFRESH_SECRET must be set to a long random string"),
-  JWT_ACCESS_EXPIRES_IN: z.string().default("15m"),
-  JWT_REFRESH_EXPIRES_IN: z.string().default("30d"),
+  JWT_ACCESS_EXPIRES_IN: z.string().default("15m") as any,
+  JWT_REFRESH_EXPIRES_IN: z.string().default("30d") as any,
 
   // Email delivery (password reset). Optional — without it, reset links are
   // only logged to the server console (development-only behavior, see
