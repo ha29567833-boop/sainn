@@ -54,8 +54,8 @@ export async function listMessages(
 ) {
   await assertMembership(conversationId, userId);
 
-  const messages = await prisma.message.findMany({
-    where: { conversationId, hiddenMessages: { none: { userId } } },
+  const messages: any[] = await prisma.message.findMany({
+    where: { conversationId, hidden: { none: { userId } } },
     orderBy: { createdAt: "desc" },
     take: limit,
     ...(cursor ? { skip: 1, cursor: { id: cursor } } : {}),
@@ -68,7 +68,7 @@ export async function listMessages(
   });
 
   // A user's read-receipt setting controls whether their read state is exposed.
-  const receiptUserIds = [...new Set(messages.flatMap((m) => m.receipts.map((r) => r.userId)))];
+  const receiptUserIds = [...new Set(messages.flatMap((m) => m.receipts.map((r: any) => r.userId)))];
   const receiptUsers = receiptUserIds.length
     ? await prisma.user.findMany({ where: { id: { in: receiptUserIds } }, select: { id: true, privacyReadReceipts: true } })
     : [];
@@ -77,7 +77,7 @@ export async function listMessages(
   return messages.map(({ reactions, receipts, ...message }) => ({
     ...message,
     reactions,
-    receipts: receipts.filter((r) => r.status === "delivered" || receiptPrivacy.get(r.userId) !== false),
+    receipts: receipts.filter((r: any) => r.status === "delivered" || receiptPrivacy.get(r.userId) !== false),
   }));
 }
 
