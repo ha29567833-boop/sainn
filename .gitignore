@@ -1,2 +1,14 @@
 *.zip
 loom/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Generated files
+dist/
+node_modules/
+
+# Editor temporary files
+*.swp

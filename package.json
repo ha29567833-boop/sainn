@@ -9,7 +9,9 @@
     "server:dev": "npm run dev --workspace=loom-server",
     "mobile:start": "npm run start --workspace=loom-mobile",
     "infra:up": "docker compose -f infra/docker-compose.yml up -d",
-    "infra:down": "docker compose -f infra/docker-compose.yml down"
+    "infra:down": "docker compose -f infra/docker-compose.yml down",
+    "build": "npm run build --workspace=loom-server",
+    "start": "npm run start --workspace=loom-server"
   },
   "author": "Sainn <tutiongpt@gmail.com>"
 }
