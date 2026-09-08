@@ -41,6 +41,7 @@ export async function buildApp() {
   });
 
   app.get("/health", async () => ({ status: "ok", timestamp: new Date().toISOString() }));
+  app.get("/", async () => ({ status: "ok", service: "Sainn API" }));
 
   await app.register(authRoutes);
   await app.register(usersRoutes);
