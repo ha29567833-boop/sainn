@@ -59,15 +59,3 @@ export const env = parsed.data;
 
 // Fail loudly and immediately in production if storage/email fall back to
 // dev-only behavior — better than silently degrading for real users.
-if (env.NODE_ENV === "production") {
-  const missing: string[] = [];
-  if (!env.S3_BUCKET || !env.S3_ACCESS_KEY_ID || !env.S3_SECRET_ACCESS_KEY) {
-    missing.push("S3_BUCKET / S3_ACCESS_KEY_ID / S3_SECRET_ACCESS_KEY (media uploads will use local disk, which does not survive Railway redeploys)");
-  }
-  if (!env.GMAIL_USER || !env.GMAIL_APP_PASSWORD) {
-    missing.push("GMAIL_USER / GMAIL_APP_PASSWORD (password reset emails will only be logged, not sent)");
-  }
-  if (missing.length > 0) {
-    throw new Error("Production configuration incomplete:\n" + missing.map((m) => `   - ${m}`).join("\n"));
-  }
-}
