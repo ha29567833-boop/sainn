@@ -11,7 +11,6 @@ const uploadUrlSchema = z.object({
 });
 
 const UPLOADS_DIR = path.resolve(process.cwd(), "uploads");
-fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 
 // Cap local-fallback upload size to prevent disk-fill abuse (S3 path has no
 // such limit imposed here — configure that at the bucket/CDN level instead).
